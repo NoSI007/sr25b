@@ -1,0 +1,237 @@
+﻿<Application
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SR25b.App"
+             StartupUri="HomePage.xaml">
+    <Application.Resources>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Setter Property="Background" Value="DarkGray"/>
+
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+<!--HACK:Testing-->
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Snow"/>
+        </Style>
+        
+        
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+            <Setter Property="Foreground" Value="LightBlue"/>
+            <Setter Property="Background" Value="DarkGray"/>
+
+            <Setter Property="Width"  Value="270"/>
+
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+        </Style>
+        <Style TargetType="TextBox">
+            
+            <Setter Property="Background" Value="Snow"/>
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Silver" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style tab item headers. it also affects the tab contents.-->
+        <Style x:Key="HCC" TargetType="HeaderedContentControl">
+            <Setter Property="Background" Value="DarkGray"/>
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Setter Property="FontFamily" Value="Corbel" />
+            <Setter Property="FontSize" Value=" 12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="MinWidth" Value="90"/>
+        </Style>
+        <Style TargetType="TabControl">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Gainsboro" ShadowDepth="7"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="TabItem" BasedOn="{StaticResource HCC}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+        
+       
+        
+        <Style TargetType="Border" >
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Snow" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Cmd" TargetType="Border" >
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Indigo" ShadowDepth="3"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button"  >
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="LightGray" ShadowDepth="5" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+            <Setter Property="Background" Value="Silver"/>
+            <Setter Property="Foreground" Value="Blue"/>
+
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderBrush" Value="Gainsboro"/>
+        </Style>
+
+        <Style TargetType="Label" >
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+            <Setter Property="Foreground" Value="LightBlue"/>
+            <Setter Property="Background" Value="Snow"/>
+
+            <Setter Property="Margin" Value="1"/>
+
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightBlue"/>
+        </Style>
+
+        <Style TargetType="TextBlock" >
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+            <Setter Property="Foreground" Value="DarkBlue"/>
+            <Setter Property="Background" Value="Transparent"/>
+
+            <!--<Setter Property="Margin" Value="1"/>-->
+
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Storyboard x:Key="sb1">
+                <DoubleAnimation  RepeatBehavior="Forever" Storyboard.TargetProperty="Width"  By="1" From="1" To="100" Duration="0:0:3"/>
+            </Storyboard>
+        <!--The cells in the results datagrid-->
+            <Style x:Key="Cells" TargetType="{x:Type DataGridCell}" >
+                <Setter Property="FontFamily" Value="Corbel"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Width" Value="auto"/>
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Padding" Value="0,2,2,0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Background" Value="Silver"/>
+                <Setter Property="Foreground" Value="Blue"/>
+
+            </Style>
+        <!-- the first column in the results datagrid-->
+        <Style x:Key="Col0" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource Cells}">
+                <Setter Property="Background" Value="Snow"/>
+                
+            </Style>
+        <!-- The First column HEADER in the results datagrid-->
+            <Style x:Key="Column1HeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <BlurEffect  Radius="7" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Setter Property="Background" Value="Snow"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="Height" Value="auto"/>
+        </Style>
+            <!--The column headings in the results datagrid-->
+            <Style x:Key="NutrientColumns" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <!--HACK:Testing-->
+                    <DropShadowEffect Color="White" ShadowDepth="1" />
+                </Setter.Value>
+            </Setter>
+                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="Width" Value="auto"/>
+                <Setter Property="Height" Value="auto"/>
+                
+                <Setter Property="LayoutTransform">
+                    <Setter.Value>
+                        <RotateTransform CenterX="150" CenterY="0" Angle="-30"/>
+                    </Setter.Value>
+                </Setter>
+                
+            </Style>
+
+       
+            
+   
+ 
+    	
+        <SolidColorBrush x:Key="ListBorder" Color="#828790"/>
+        
+    	
+    	
+
+
+
+    </Application.Resources>
+</Application>

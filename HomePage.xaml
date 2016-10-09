@@ -1,0 +1,198 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:my="clr-namespace:SR25b" 
+      xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="SR25b.HomePage" 
+      mc:Ignorable="d" Title="Diet Check" ForceCursor="False" 
+    FontFamily="Corbel" 
+    MinHeight="500" MinWidth="440" Height="auto" Width="auto" SnapsToDevicePixels="True" WindowHeight="500" WindowWidth="600"
+    >
+    <Page.Resources>
+        <my:zsrDataSet x:Key="zsrDataSet" />
+        <CollectionViewSource x:Key="fD_GROUPViewSource" Source="{Binding FD_GROUP, Source={StaticResource zsrDataSet}}" />
+        <CollectionViewSource x:Key="fD_GROUPFOOD_DESViewSource" Source="{Binding FD_GROUP_FOOD_DES, Source={StaticResource fD_GROUPViewSource}}" />
+        <CollectionViewSource x:Key="nUTR_DEFViewSource" Source="{Binding NUTR_DEF, Source={StaticResource zsrDataSet}}" />
+        <CollectionViewSource x:Key="fOOD_DESViewSource" Source="{Binding FOOD_DES, Source={StaticResource zsrDataSet}}" />
+    </Page.Resources>
+    <TabControl  x:Name="tabControl1" FontWeight="Bold">
+        <TabItem Header="Main" x:Name="z_p1" ToolTip="You can make a list for comparing Nutrients in foods.">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  DataContext="{StaticResource fD_GROUPViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="220" />
+                </Grid.RowDefinitions>
+                <ProgressBar Margin="10,10,0,0" Background="White" Foreground="LimeGreen" Visibility="Collapsed" x:Name="z_prog" Width="100" Height="14"  Grid.RowSpan="1" Grid.Column="1" Grid.Row="0"  HorizontalAlignment="Left"   VerticalAlignment="Top"/>
+
+                <HeaderedContentControl Grid.Row="0" Grid.Column="0"    Header="Browse and search USDA Food Database" VerticalAlignment="Center" FontWeight="Bold" BorderBrush="Red" BorderThickness="5" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Margin="5,1,1,1" x:Name="Wild" Width="100" Height="30" HorizontalAlignment="Center" VerticalContentAlignment="Center" ToolTip="Enter a Food Name here!" />
+                        <Button  Margin="5,1,1,1" x:Name="z_go" Width="60" Height="28" Content="Find" Click="z_go_Click" ToolTip="Press Here to Find Foods in the database." />
+                    </StackPanel>
+                </HeaderedContentControl>
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" BorderThickness="2">
+                    <ListView  ItemsSource="{Binding}" x:Name="grpList" SelectionMode="Single"  SelectedValuePath="FdGrp_CD" ToolTip="Click here to select a group!" SelectionChanged="grpList_SelectionChanged" >
+                        <ListView.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Control.VerticalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn x:Name="fdGrp_Desc" Header="  Food Groups  " Width="270">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding FdGrp_Desc}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0" >
+                    <ListView Margin="0,0,0,10"  x:Name="FooList" DisplayMemberPath="Desc" ItemsSource="{Binding Source={StaticResource fD_GROUPFOOD_DESViewSource}}" SelectedValuePath="NDB_No" SelectionMode="Single" ToolTip="Select one then Press Add!">
+                        <ListView.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Control.VerticalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn x:Name="Desc" Header="Food List" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Desc}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+                
+                <HeaderedContentControl FontWeight="Bold" FontSize="16" Header="Commands" Margin="30,0,0,0" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"  BorderBrush="Transparent" BorderThickness="5">
+                    <Grid >
+                        <Grid.RowDefinitions >
+                            
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Style="{StaticResource Cmd}" Grid.Row="0" BorderThickness="2">
+                            <StackPanel  Orientation="Horizontal">
+                                <Button  Margin="2,3,3,3"  x:Name="z_new" Content="New Search" Click="z_new_Click" ToolTip="Start a new comparison." />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Cmd}"  Grid.Row="1" BorderThickness="2">
+
+                            <StackPanel  Background="AliceBlue"  Orientation="Horizontal">
+                                <Button  Margin="3" Width="96" x:Name="z_comp"  Content="Table Compare" Background="Silver"  Click="z_comp_Click" Visibility="Collapsed" ToolTip="View results as a single table" />
+                                <Button  Margin="3" Width="96" x:Name="z_comp1" Content="Panel Compare" Background="Silver"  Click="z_PanelComp" Visibility="Collapsed" ToolTip="View results as a Panel" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Cmd}" Grid.Row="2" BorderThickness="2">
+                        <StackPanel  Orientation="Horizontal">
+                            <Button  Margin="2,3,3,3" Width="28" x:Name="z_add" Content="Add"   Click="z_add_Click" ToolTip="Add selected food to the list below." />
+
+                            <Button  Margin="5,3,3,3" Width="55" x:Name="z_del" Content="Remove"  Foreground="#770000" Click="z_del_Click" ToolTip="Remove selected item from the compare list" />
+                            <Button  Margin="3" Width="37" x:Name="z_clear" Content="Clear"   Click="z_clear_Click" ToolTip="Remove all items from the compare list." />
+                        </StackPanel>
+                        </Border>
+                     
+                        <HeaderedContentControl Grid.Row="3"  Background="LightGoldenrodYellow" Margin="5" Header="Active selections:-" >
+                            <ListBox x:Name="cmp" FontSize="11" FontWeight="Bold" ToolTip="The List to Compare.">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="200" Height="39" BorderThickness="6" BorderBrush="Green">
+                                        <TextBlock Background="black" Foreground="White" Width="200" Height="25"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </HeaderedContentControl>
+                    </Grid>
+                </HeaderedContentControl>
+                
+               
+            </Grid>
+        </TabItem>
+        <TabItem Header="Nutrients" x:Name="z_p0" >
+            <Grid DataContext="{StaticResource nUTR_DEFViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="300" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="2" Grid.Column="0" BorderBrush="Transparent" BorderThickness="3">
+                    <DataGrid SelectionUnit="Cell" SelectionMode="Single"  AutoGenerateColumns="False" EnableRowVirtualization="True" CanUserDeleteRows="False" CanUserAddRows="False"  ItemsSource="{Binding}" x:Name="z_defg" RowDetailsVisibilityMode="VisibleWhenSelected" ToolTip="Check The Box To Include Nutrient in Comparison Tables." >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn  x:Name="unitsColumn" Binding="{Binding Units}" Header="Units" Width="50"/>
+                            <DataGridTextColumn  x:Name="nutrDescColumn" Binding="{Binding NutrDesc}" Header="Nutr Desc" Width="155" />
+                            <DataGridCheckBoxColumn  x:Name="isSelectedColumn" Binding="{Binding IsSelected, Mode=TwoWay}" Header="In" Width="50" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" BorderBrush="Transparent" BorderThickness="7"  >
+                    <Button x:Name="z_updatedef" Content="Update" Background="White" Click="z_updatedef_Click" ToolTip="Save Changes to database." />
+                </Border>
+                <Label Content="Choose from Nutrient List Below (Min. 1 )" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label x:Name="z_msg" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="z_nut_count" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="z_p2" Header="Results"  Visibility="Collapsed" >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Name="z_resLab" HorizontalContentAlignment="Center" ToolTip="Browse Comparison Table on this Tab."   />
+                <Border Grid.Row="1" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <DataGrid Width="auto" Height="auto" VerticalAlignment="Top" Margin="2,2,2,20" ScrollViewer.VerticalScrollBarVisibility="Auto" FrozenColumnCount="1" GridLinesVisibility="All"  AutoGenerateColumns="True" AutoGeneratingColumn="z_res_AutoGeneratingColumn"  x:Name="z_res"   CanUserSortColumns="True" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" CanUserDeleteRows="False" />
+            </Border>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Paneled Results" Visibility="Collapsed" x:Name="pres" >
+            <Border  BorderBrush="Transparent" BorderThickness="5">
+                <Grid DataContext="{StaticResource nUTR_DEFViewSource}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="230" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" BorderThickness="10">
+                        <ListBox SelectionChanged="ResList_SelectionChanged"    x:Name="ResList" SelectionMode="Single" />
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Transparent" BorderThickness="7"  >
+                        <DataGrid x:Name="ResGrid" AutoGenerateColumns="True"   RowDetailsVisibilityMode="VisibleWhenSelected"  GridLinesVisibility="All" />
+                    </Border>
+                    <Label x:Name="ResListHead" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Click One Item on the Left Panel To View Results."/>
+                    <Label x:Name="ResGridHead" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                </Grid>
+            </Border>
+        </TabItem>
+        <TabItem  Header="Brows List" >
+           <my:UnutList HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Width="auto" Height="auto"/>
+        </TabItem>
+    </TabControl>
+</Page>
